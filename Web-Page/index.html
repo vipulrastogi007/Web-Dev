@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontend Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --muted: #6b6b6b;
+      --accent: #2563eb;
+      --border: #d4d0c8;
+      --bg: #f9f7f2;
+      --card-bg: #ffffff;
+      --cream: #f0ede6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 4rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--ink);
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: .25rem;
+      list-style: none;
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .nav-links li::after { content: '/'; margin: 0 .5rem; color: var(--border); }
+    .nav-links li:last-child::after { display: none; }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: .9rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ── MAIN GRID ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1.6fr;
+      border-bottom: 1px solid var(--border);
+      min-height: 420px;
+    }
+
+    .main-grid > section {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+    }
+    .main-grid > section:last-child { border-right: none; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: .01em;
+    }
+
+    /* Projects list */
+    .project-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+
+    .project-list a {
+      display: block;
+      padding: .55rem .85rem;
+      font-size: .875rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--card-bg);
+      transition: background .18s, border-color .18s, transform .18s;
+    }
+    .project-list a:hover {
+      background: var(--cream);
+      border-color: var(--ink);
+      transform: translateX(3px);
+    }
+
+    /* Work experience */
+    .work-entry { margin-bottom: 2rem; }
+    .work-entry:last-child { margin-bottom: 0; }
+
+    .work-entry h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .35rem;
+    }
+
+    .work-entry p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: .6rem;
+    }
+
+    .work-entry a {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+    .work-entry a:hover { border-color: var(--accent); }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1.75rem 0;
+    }
+
+    /* Education */
+    .edu-summary {
+      font-size: .875rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .course-label {
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .75rem;
+    }
+
+    .course-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .course-list li {
+      font-size: .8rem;
+      color: var(--ink);
+      padding-left: .85rem;
+      position: relative;
+    }
+    .course-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 3rem 4rem;
+    }
+
+    .testimonials .section-title { margin-bottom: 2rem; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.07);
+    }
+
+    .card-quote {
+      font-size: .875rem;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .card-author { font-size: .78rem; font-weight: 500; }
+    .card-role { font-size: .75rem; color: var(--muted); margin-top: .2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 4rem;
+      text-align: center;
+      font-size: .8rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1  { animation: fadeUp .7s ease both; }
+    .hero p   { animation: fadeUp .7s .15s ease both; }
+    .main-grid > section { animation: fadeUp .6s .25s ease both; }
+    .card { animation: fadeUp .55s ease both; }
+    .card:nth-child(2) { animation-delay: .1s; }
+    .card:nth-child(3) { animation-delay: .2s; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      .main-grid { grid-template-columns: 1fr; }
+      .main-grid > section { border-right: none; border-bottom: 1px solid var(--border); }
+      .testimonials { padding: 2rem 1.5rem; }
+      .cards { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">
+      <div class="logo-mark"></div>
+      Vipul Rastogi
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Projects</a></li>
+      <li><a href="#">Articles</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <h1>Frontend Developer</h1>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid">
+
+    <!-- Projects -->
+    <section>
+      <h2 class="section-title">Projects</h2>
+      <ul class="project-list">
+        <li><a href="#">HTML Only Portfolio</a></li>
+        <li><a href="#">Calculator</a></li>
+        <li><a href="#">Quiz App</a></li>
+        <li><a href="#">Countdown Timer</a></li>
+        <li><a href="#">Product Upcoming Page</a></li>
+      </ul>
+    </section>
+
+    <!-- Work Experience -->
+    <section>
+      <h2 class="section-title">Work Experience</h2>
+
+      <div class="work-entry">
+        <h3>roadmap.sh</h3>
+        <p>Solved all the frontend projects</p>
+        <a href="#">Visit my Profile →</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="work-entry">
+        <h3>OpenSource Work</h3>
+        <p>Contributed to 50 opensource projects. Made my own projects with 200 GitHub Stars.</p>
+        <a href="#">Visit my GitHub Profile →</a>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="section-title">Education</h2>
+      <p class="edu-summary">
+        Graduated with 3.76 out of 4 CGPA. Won Acme Hackathon. Organized 30 sessions.
+      </p>
+      <p class="course-label">Courses I took</p>
+      <ul class="course-list">
+        <li>Object Oriented Programming</li>
+        <li>Data Structures and Algorithms</li>
+        <li>Web Engineering</li>
+        <li>Artificial Intelligence</li>
+        <li>Human Computer Interaction</li>
+        <li>Computer Graphics</li>
+        <li>Database Management Systems</li>
+        <li>Distributed Database Systems</li>
+        <li>Discrete Mathematics</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <h2 class="section-title">Reviews from my Teachers</h2>
+    <div class="cards">
+      <div class="card">
+        <p class="card-quote">Vipul Rastogi was a brilliant student; always stood out with his assignments.</p>
+        <p class="card-author">Jane Doe</p>
+        <p class="card-role">Assistant Professor</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">Vipul Rastogi was a brilliant student; always stood out with his assignments.</p>
+        <p class="card-author">Jane Doe</p>
+        <p class="card-role">Assistant Professor</p>
+      </div>
+      <div class="card">
+        <p class="card-quote">Vipul Rastogi was a brilliant student; always stood out with his assignments.</p>
+        <p class="card-author">Jane Doe</p>
+        <p class="card-role">Assistant Professor</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; all rights reserved 2025
+  </footer>
+
+</body>
+</html>
